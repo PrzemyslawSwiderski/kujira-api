@@ -1,6 +1,7 @@
 '''events queue module'''
 from store import redis_db
 
+
 class Redis(redis_db. RedisConnection):
     '''management of tasks in Redis database '''
     def __init__(self):
@@ -14,6 +15,14 @@ class Redis(redis_db. RedisConnection):
     def connect(self):
         '''connecting'''
         super(Redis, self).connect()
+
+    def append_metric(self, metric_name, metric):
+        '''appends metric as string to database'''
+        self.redis_connection.append(metric_name, metric)
+
+    def get_metric(self, metric_name):
+        '''gets metric from database'''
+        return self.redis_connection.get(metric_name)
 
     def push(self, event):
         '''pushes event to redis store into list'''

@@ -8,14 +8,14 @@ import requests
 
 
 class GraphiteFetcher(object):
-    '''
-    classdocs
-    '''
+    """
+    Fetches metrics from graphite-api
+    """
 
     def __init__(self, redis_url='http://127.0.0.1:8013/render'):
-        '''
+        """
         Constructor
-        '''
+        """
         self.redis_url = redis_url
 
     def get_data_json(self, target, from_param, out_format='json'):
