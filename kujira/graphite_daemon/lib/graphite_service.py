@@ -9,10 +9,6 @@ Created on 30 kwi 2016
 
 from graphite_daemon import GraphiteDaemon
 
-'''
-Start the graphite daemon
-'''
-
 if __name__ == '__main__':
     dm = GraphiteDaemon()
     dm.run()
