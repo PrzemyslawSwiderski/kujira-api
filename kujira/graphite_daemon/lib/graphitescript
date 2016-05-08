@@ -1,0 +1,6 @@
+#!/bin/sh
+
+PYTHONPATH="${PYTHONPATH}:/media/sf_centos7/kujira-api/"
+export PYTHONPATH
+
+python /media/sf_centos7/kujira-api/kujira/graphite_daemon/lib/graphite_service.py

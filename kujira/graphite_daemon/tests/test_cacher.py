@@ -5,7 +5,7 @@ Created on 30 kwi 2016
 """
 import unittest
 import time
-from graphite_daemon.lib.graphite_cacher import GraphiteCacher
+from kujira.graphite_daemon.lib.graphite_cacher import GraphiteCacher
 
 
 class Test(unittest.TestCase):

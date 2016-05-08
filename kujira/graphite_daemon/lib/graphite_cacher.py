@@ -4,8 +4,8 @@ Created on 29 kwi 2016
 @author: PrzemyslawSwiderski
 """
 import time
-from graphite_fetcher import GraphiteFetcher
-from store.events_queue import Redis
+from kujira.graphite_daemon.lib.graphite_fetcher import GraphiteFetcher
+from kujira.store.events_queue import Redis
 
 
 class GraphiteCacher(object):

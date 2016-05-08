@@ -4,7 +4,7 @@ Created on 30 kwi 2016
 @author: PrzemyslawSwiderski
 """
 import unittest
-from graphite_daemon.lib.graphite_daemon import GraphiteDaemon
+from kujira.graphite_daemon.lib.graphite_daemon import GraphiteDaemon
 
 
 class Test(unittest.TestCase):

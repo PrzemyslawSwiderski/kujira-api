@@ -1,5 +1,5 @@
 '''library to acces Mongo database allowing to insert and get tokens.'''
-from store import redis_db
+from kujira.store import redis_db
 
 class Redis(redis_db.RedisConnection):
     '''token management class '''

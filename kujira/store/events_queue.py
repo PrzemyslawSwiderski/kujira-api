@@ -1,6 +1,5 @@
 '''events queue module'''
-from store import redis_db
-
+from kujira.store import redis_db
 
 class Redis(redis_db. RedisConnection):
     '''management of tasks in Redis database '''

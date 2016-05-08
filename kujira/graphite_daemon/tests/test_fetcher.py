@@ -5,7 +5,7 @@ Created on 29 kwi 2016
 """
 import unittest
 
-from graphite_daemon.lib.graphite_fetcher import GraphiteFetcher
+from kujira.graphite_daemon.lib.graphite_fetcher import GraphiteFetcher
 
 
 class Test(unittest.TestCase):
