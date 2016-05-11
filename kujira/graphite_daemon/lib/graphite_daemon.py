@@ -5,6 +5,8 @@ Created on 30 kwi 2016
 
 """
 import time
+import ConfigParser
+import ast
 from kujira.graphite_daemon.lib.graphite_cacher import GraphiteCacher
 
 
@@ -17,13 +19,18 @@ class GraphiteDaemon(object):
         """
         Constructor
         """
+
+        config = ConfigParser.RawConfigParser()
+        config.read('/etc/kujira-graphite.cfg')
+        self.metrics_to_watch = ast.literal_eval(config.get('Metrics', 'metrics'))
+
         self.cachers = []
-        self.cachers.append(GraphiteCacher('servers.localhost_localdomain.cpu.cpu0.system'))
+
+        for m in self.metrics_to_watch:
+            self.cachers.append(GraphiteCacher(m))
+
         for c in self.cachers:
-            print("__________________\n")
-            print("Metric named: " + c.target_metric + "\n")
-            print("Metric pushed to redis:\n")
-            print(c.get_metric_and_push_to_redis())
+            c.get_metric_and_push_to_redis()
 
     def run(self):
         """
@@ -32,13 +39,7 @@ class GraphiteDaemon(object):
         while True:
             time.sleep(61)
             for c in self.cachers:
-                print("__________________\n")
-                print("Metric named: " + c.target_metric + "\n")
-                print("All Dataponits in redis:\n")
-                print(c.get_metric_from_redis())
-                print("__________________\n")
-                print("Last datapoints:\n")
-                print(c.get_metric_and_append_to_redis())
+                c.get_metric_and_append_to_redis()
 
     def add_metric(self, target_metric):
         """

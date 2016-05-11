@@ -21,7 +21,11 @@ class Test(unittest.TestCase):
         self.assertIsNotNone(self.cacher)
         pass
 
-    def testCacherGet(self):
+    def testCacherDelete(self):
+        print("Before delete ->")
+        print(self.cacher.get_metric_from_redis())
+        self.cacher.delete_metric_from_redis()
+        print("After delete ->")
         print(self.cacher.get_metric_from_redis())
         self.assertIsNotNone(self.cacher)
         pass
