@@ -63,4 +63,3 @@ class GraphiteCacher(object):
     def delete_metric_from_redis(self):
         """Remove metric from Redis"""
         delete_metric(self.target_metric)
-        pass
