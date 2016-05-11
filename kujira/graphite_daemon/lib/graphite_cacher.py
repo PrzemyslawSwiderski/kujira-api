@@ -5,7 +5,7 @@ Created on 29 kwi 2016
 """
 import time
 
-from kujira.graphite_daemon.lib.redis_connection import *
+from kujira.graphite_daemon.lib.redis_connection import append_metric, get_metric, delete_metric
 from kujira.graphite_daemon.lib.graphite_fetcher import GraphiteFetcher
 
 
