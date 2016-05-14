@@ -6,7 +6,7 @@ To be able to use library you have to copy config file to /etc :
 * `cp config/kujira-graphite.cfg /etc/kujira-graphite.cfg`
 
 It is also possible to start a caching service:
-* change `ExecStart` in `service/kujira-graphite.service` to path where your `graphite_redis_script` is
+* change `ExecStart` in `service/kujira-graphite.service` to your `graphite_redis_script` location
 * `cp service/kujira-graphite.service /etc/systemd/system/kujira-graphite.service`
 * change config file `/etc/kujira-graphite.cfg` if necessary
 * `systemctl daemon-reload` - to reload systemctl
