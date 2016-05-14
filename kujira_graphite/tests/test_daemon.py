@@ -3,14 +3,17 @@ Created on 30 kwi 2016
 
 @author: PrzemyslawSwiderski
 """
+import os
+import sys
 import unittest
-from kujira.graphite_daemon.lib.graphite_daemon import GraphiteDaemon
 
+sys.path.append(os.path.realpath('..'))
+
+from lib.kujira_graphite import KujiraGraphite
 
 class Test(unittest.TestCase):
     def setUp(self):
-        self.daemon = GraphiteDaemon('/tmp/graphite_daemon.pid')
-        print("CTRL + C to stop daemon")
+        self.daemon = KujiraGraphite()
         pass
 
     def tearDown(self):

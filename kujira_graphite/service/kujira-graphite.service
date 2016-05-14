@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
-ExecStart=/media/sf_centos7/kujira-api/kujira/graphite_daemon/lib/graphitescript
+ExecStart=/media/sf_centos7/kujira-api/kujira_graphite/script/graphite_redis_script
 
 
 [Install]

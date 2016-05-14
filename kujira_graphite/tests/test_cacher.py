@@ -3,9 +3,14 @@ Created on 30 kwi 2016
 
 @author: PrzemyslawSwiderski
 """
-import unittest
+import os
+import sys
 import time
-from kujira.graphite_daemon.lib.graphite_cacher import GraphiteCacher
+import unittest
+
+sys.path.append(os.path.realpath('..'))
+
+from lib.graphite_cacher import GraphiteCacher
 
 
 class Test(unittest.TestCase):

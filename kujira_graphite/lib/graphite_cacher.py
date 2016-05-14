@@ -4,9 +4,10 @@ Created on 29 kwi 2016
 @author: PrzemyslawSwiderski
 """
 import time
+import ConfigParser
 
-from kujira.graphite_daemon.lib.redis_connection import append_metric, get_metric, delete_metric
-from kujira.graphite_daemon.lib.graphite_fetcher import GraphiteFetcher
+from redis_connection import RedisConnection
+from graphite_fetcher import GraphiteFetcher
 
 
 class GraphiteCacher(object):
@@ -20,24 +21,28 @@ class GraphiteCacher(object):
         """
         self.target_metric = target_metric
         self.fetcher = GraphiteFetcher()
+        self.redis = RedisConnection()
         self.timestamp = int(round(time.time()))
+        self.config = ConfigParser.RawConfigParser()
+        self.config.read('/etc/kujira-graphite.cfg')
 
     def get_metric_and_push_to_redis(self):
         """Get metric from GraphiteFetcher and push to redis"""
+        how_old_fetch_from_start = self.config.get('Metrics', 'how_old')
 
-        data = self.fetcher.get_data_json(self.target_metric, '-30minutes')
+        data = self.fetcher.get_data_json(self.target_metric, how_old_fetch_from_start)
 
-        redis_metrics = get_metric(self.target_metric)
+        redis_metrics = self.redis.get_metric(self.target_metric)
 
         if redis_metrics is None:
             d_string = str(data[0]['datapoints'][0])
-            append_metric(data[0]['target'], d_string)
+            self.redis.append_metric(data[0]['target'], d_string)
             self.timestamp = data[0]['datapoints'][1]
 
         for index, d in enumerate(data[0]['datapoints']):
             if d[0] is not None and index != 0:
                 d_string = str(d)
-                append_metric(data[0]['target'], ", " + d_string)
+                self.redis.append_metric(data[0]['target'], ", " + d_string)
                 self.timestamp = d[1]
 
         return data
@@ -49,7 +54,7 @@ class GraphiteCacher(object):
         for d in data[0]['datapoints']:
             if d[0] is not None and d[1] > self.timestamp:
                 d_string = str(d)
-                append_metric(data[0]['target'], ", " + d_string)
+                self.redis.append_metric(data[0]['target'], ", " + d_string)
                 self.timestamp = d[1]
 
         return data
@@ -62,4 +67,4 @@ class GraphiteCacher(object):
 
     def delete_metric_from_redis(self):
         """Remove metric from Redis"""
-        delete_metric(self.target_metric)
+        self.redis.delete_metric(self.target_metric)

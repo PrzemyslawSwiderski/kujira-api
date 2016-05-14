@@ -3,9 +3,13 @@ Created on 29 kwi 2016
 
 @author: PrzemyslawSwiderski
 """
+import os
+import sys
 import unittest
 
-from kujira.graphite_daemon.lib.graphite_fetcher import GraphiteFetcher
+sys.path.append(os.path.realpath('..'))
+
+from lib.graphite_fetcher import GraphiteFetcher
 
 
 class Test(unittest.TestCase):

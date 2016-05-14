@@ -6,9 +6,9 @@ Created on 30 kwi 2016
 @author: PrzemyslawSwiderski
 
 """
-from kujira.graphite_daemon.lib.graphite_daemon import GraphiteDaemon
+from kujira_graphite import KujiraGraphite
 
 if __name__ == '__main__':
-    dm = GraphiteDaemon()
+    dm = KujiraGraphite()
     dm.run()
 

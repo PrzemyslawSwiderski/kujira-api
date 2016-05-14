@@ -7,10 +7,10 @@ Created on 30 kwi 2016
 import time
 import ConfigParser
 import ast
-from kujira.graphite_daemon.lib.graphite_cacher import GraphiteCacher
+from graphite_cacher import GraphiteCacher
 
 
-class GraphiteDaemon(object):
+class KujiraGraphite(object):
     """
     Instance to run in service
     """
@@ -19,9 +19,9 @@ class GraphiteDaemon(object):
         """
         Constructor
         """
-
+        kujira_graphite_config_file_location = '/etc/kujira-graphite.cfg'
         config = ConfigParser.RawConfigParser()
-        config.read('/etc/kujira-graphite.cfg')
+        config.read(kujira_graphite_config_file_location)
         self.metrics_to_watch = ast.literal_eval(config.get('Metrics', 'metrics'))
 
         self.cachers = []
@@ -41,8 +41,3 @@ class GraphiteDaemon(object):
             for c in self.cachers:
                 c.get_metric_and_append_to_redis()
 
-    def add_metric(self, target_metric):
-        """
-        run method
-        """
-        self.cachers.append(GraphiteCacher(target_metric))
