@@ -12,4 +12,5 @@ It is also possible to start a caching service:
 * systemctl daemon-reload - to reload systemctl
 * systemctl enable kujira-graphite - to start service during the system boot
 * systemctl start kujira-graphite - to start service
+
 Now you can check if kujira-graphite is active 'systemctl status kujira-graphite' and check redis database.
