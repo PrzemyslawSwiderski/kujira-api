@@ -40,4 +40,3 @@ class KujiraGraphite(object):
             time.sleep(61)
             for c in self.cachers:
                 c.get_metric_and_append_to_redis()
-

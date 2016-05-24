@@ -1,8 +1,17 @@
+"""
+Created on 30 kwi 2016
+
+@author: PrzemyslawSwiderski
+
+"""
 import redis
 import ConfigParser
 
-
 class RedisConnection(object):
+    """
+    Class to establish connection and manage metrics in redis
+    """
+
     def __init__(self):
         config = ConfigParser.RawConfigParser()
         kujira_graphite_config_file_location = '/etc/kujira-graphite.cfg'
